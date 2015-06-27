@@ -1,0 +1,38 @@
+# Maintener Kuntet
+
+pkg_name="python3"
+pkg_ver="3.4.3"
+pkg_desc="Python is a programming language that lets you work more quickly and integrate your systems more effectively."
+pkg_rdeps="libffi-3.2.1"
+pkg_bdeps=""
+pkg_arch="x86 x86_64"
+pkg_license="GPLv3"
+pkg_uri="https://www.python.org"
+pkg_src=("python3::https://www.python.org/ftp/python/3.4.3/Python-3.4.3.tar.xz")
+pkg_hashsum=("md5::7d092d1bba6e17f0d9bd21b49e441dd5" "md5::7d092d1bba6e17f0d9bd21b49e441dd5")
+pkg_post_rule="hati-hati ularnya bisa gigit"
+aspkg_preapre() {
+  : 
+}
+ 
+aspkg_build() {
+  : CXX="/usr/bin/g++"              \
+      ./configure --prefix=/usr       \
+          --enable-shared     \
+          --with-system-expat \
+          --with-system-ffi   \
+          --without-ensurepip &&
+    make
+}
+ 
+aspkg_pre_install() {
+  : 
+}
+ 
+aspkg_install() {
+  : make install &&
+    chmod -v 755 /usr/lib/libpython3.4m.so &&
+    chmod -v 755 /usr/lib/libpython3.so
+}
+
+# vim: ft=sh:ts=4:sw=2:sts=2:syn=sh:et
